@@ -1,173 +1,92 @@
 #include <iostream>
+#include <string.h>
 
 using std::cin;
 using std::cout;
-using std::string;
 
-int *tr;
-bool *empty;
+void I();
+void D();
+void S();
+void X();
+void N();
+void P();
+void R();
 
-
-void add(int x); void search(int x); void remove(int x); void min(); void max(); void next(int x);
-void previous(int x); void preorder_node(int x); void inorder_node(int x); void postorder_node(int x);
-
+const int AR_SIZE = 10000;
+int T[AR_SIZE];
+int x, k = 0;
+int *node = T;
 int main() {
-  int t, n, x, op;
-  char instr;
+  int t, n;
+  char ch;
   cin >> t;
+  cin >> n;
   for(int i = 0; i < t; i++) {
-    cin >> n;
-    tr = new int [n+1];
-    empty = new bool [n+1];
-    for(int a = 1; a < n+1; a++)
-      empty[a] = true;
-    for(int k = 1; k <= n; k++) {
-      cin >> instr;
-      switch(instr) {
-        case 'I':
-          cin >> x;
-          // add x to tree
-          add(x);
-          break;
-        case 'D':
-          cin >> x;
-          // remove x from tree
-          break;
-        case 'S':
-          cin >> x;
-          // search x in tree
-          search(x);
-          break;
-        case 'X':
-          cin >> op;
-          switch(op) {
-            case 0:
-              // find smallest x in tree
-              break;
-            case 1:
-              // find biggest x in tree
-              break;
-          }
-          break;
-        case 'N':
-          cin >> x;
-          // find next x
-          break;
-        case 'P':
-          cin >> x;
-          // find previous x
-          break;
-        case 'R':
-          cin >> op;
-          switch(op) {
-            case 0:
-              // show inorder node
-              break;
-            case 1:
-              //  show preorder node
-              break;
-            case 2:
-              // show postorder node
-              break;
-        }
-        break;
-        default:
-          cout << "-\n";
-          break;
+    for(int l = 0; l < n; l++) {
+      cin >> ch;
+      switch(ch) {
+        case 'I': I(); break;
+        case 'D': D(); break;
+        case 'S': S(); break;
+        case 'X': X(); break;
+        case 'N': N(); break;
+        case 'P': P(); break;
+        case 'R': R(); break;
       }
     }
-    cout << "test " << i << '\n';
-    delete [] tr;
-    delete [] empty;
+    node = T;
+    k = 0;
+    cout << "test " << i+1 << '\n';
   }
-
-  return 0;
+}
+void I(){
+  cin >> x;
+  *node = x;
+  node++;
+  k++;
 }
 
-void add(int x)
-{
-    if (empty[1]==true)
-    {
-        tr[1] = x;
-        empty[1]=false;
-    }
-    else
-    {
-    bool znalazlem_miejsce=false;
-    int wezel=1;
-
-    while (znalazlem_miejsce==false)
-    {
-        if (empty[wezel]==true)
-        {
-            znalazlem_miejsce=true;
-            tr[wezel]=x;
-            empty[wezel]=false;
-
-        }
-        else if(x<tr[wezel])
-        {
-            //w lewo
-            wezel=2*wezel;
-        }
+void S() {
+  cin >> x;
+  int i;
+  for(i = 0; i < k+1; i++) {
+    if(T[i] == x) {
+      for(int l = 0; l < i+1; l++) {
+        if(T[l] == 0)
+          continue;
         else
-        {
-            //w prawo
-            wezel=2*wezel+1;
-        }
+          cout << T[l] << ' ';
+      }
+      cout << '\n';
+      return;
     }
-    }
-
-}
-
-
-void search(int x) {
-  bool found = false;
-  int node = 1;
-
-  while (found == false) {
-    if(x == tr[node]) {
-      found = true;
-      cout << x << ' ';
-    } else if(x < tr[node]) {
-      node = 2 * node;
-      cout << tr[node-1] << ' ';
-    } else {
-      node = 2 * node + 1;
-      cout << tr[node-1] << ' ';
-    }
+    if(T[i] == 0)
+      continue;
   }
-  cout << '\n';
+  cout << "-\n";
 }
 
-void remove(int x) {
-
+void D() {
+  cin >> x;
+  int i = 0;
+  while(T[i] != x && i < k+1) {
+    i++;
+  }
+  T[i] = 0;
 }
 
-void next(int x) {
-
-}
-
-void previous(int x) {
-
-}
-
-void min() {
+void X() {
 
 }
 
-void max() {
+void N() {
 
 }
 
-void inorder_node() {
+void P() {
 
 }
 
-void preorder_node() {
-
-}
-
-void postorder_node() {
+void R() {
 
 }
