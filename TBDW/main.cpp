@@ -76,7 +76,21 @@ void D() {
 }
 
 void X() {
-
+  int *min = nullptr;
+  int *max = nullptr;
+  cin >> x;
+  for(int i = 0; i < k; i++) {
+    for(int l = 0; l < k; l++) {
+      if(T[i] > T[l]) {
+        min = &T[l];
+        max = &T[i];
+      }
+    }
+  }
+  if(x == 0)
+    cout << *min << '\n';
+  else if(x == 1)
+    cout << *max << '\n';
 }
 
 void N() {
