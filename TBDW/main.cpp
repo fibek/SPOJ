@@ -1,8 +1,9 @@
 #include <iostream>
-#include <string.h>
+#include <algorithm>
 
 using std::cin;
 using std::cout;
+using std::sort;
 
 void I();
 void D();
@@ -22,6 +23,7 @@ int main() {
   cin >> t;
   cin >> n;
   for(int i = 0; i < t; i++) {
+    cout << "test " << i+1 << '\n';
     for(int l = 0; l < n; l++) {
       cin >> ch;
       switch(ch) {
@@ -36,7 +38,6 @@ int main() {
     }
     node = T;
     k = 0;
-    cout << "test " << i+1 << '\n';
   }
 }
 void I(){
@@ -94,13 +95,47 @@ void X() {
 }
 
 void N() {
-
+  cin >> x;
+  int ind = 0;
+  while(T[ind] != x && ind < k-1)
+    ind++;
+  if(T[ind+1] == 0)
+    cout << "-\n";
+  else
+    cout << T[ind+1] << '\n';
 }
 
 void P() {
-
+  cin >> x;
+  int ind = 0;
+  while(T[ind] != x && ind < k)
+    ind++;
+  if(T[ind-1] == 0)
+    cout << "-\n";
+  else
+    cout << T[ind-1] << '\n';
 }
 
 void R() {
-
+  cin >> x;
+  switch(x) {
+    case 0: //inorder
+      break;
+    case 2: //preorder
+      for(int i = 0; i < k; i++) {
+        if(T[i] == 0)
+          continue;
+        else
+          cout << T[i] << ' ';
+        }
+      break;
+    case 1: //postorder
+      for(int i = k; i >= 0; i--) {
+        if(T[i] == 0)
+          continue;
+        else
+          cout << T[i] << ' ';
+        }
+      break;
+  }
 }
