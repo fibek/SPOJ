@@ -13,16 +13,17 @@ void N();
 void P();
 void R();
 
-const int AR_SIZE = 10000;
-int T[AR_SIZE];
-int x, k = 0;
-int *node = T;
+const int AR_SIZE = 10001;
+int *T;
+int x;
+
 int main() {
   int t, n;
   char ch;
   cin >> t;
   cin >> n;
   for(int i = 0; i < t; i++) {
+    T = new int [AR_SIZE];
     cout << "test " << i+1 << '\n';
     for(int l = 0; l < n; l++) {
       cin >> ch;
@@ -36,106 +37,76 @@ int main() {
         case 'R': R(); break;
       }
     }
-    node = T;
-    k = 0;
+    delete [] T;
   }
 }
 void I(){
+  int i = 1;
+  bool a = false;
   cin >> x;
-  *node = x;
-  node++;
-  k++;
+  while(!a) {
+    if(T[i] == 0) {
+      T[i] = x;
+      a = true;
+    } else if(x < T[i]) {
+      i *= 2;
+    } else {
+      i = 2 * i + 1;
+    }
+  }
 }
 
 void S() {
   cin >> x;
-  int i;
-  for(i = 0; i < k+1; i++) {
-    if(T[i] == x) {
-      for(int l = 0; l < i+1; l++) {
-        if(T[l] == 0)
-          continue;
-        else
-          cout << T[l] << ' ';
-      }
-      cout << '\n';
-      return;
-    }
-    if(T[i] == 0)
+  int i = 1;
+  while(T[i] != x) {
+    cout << T[i] << ' ';
+    if(T[i] == -1)
       continue;
+    else if(x < T[i])
+      i *= 2;
+    else
+      i = 2 * i + 1;
   }
-  cout << "-\n";
+  cout << T[i] << '\n';
 }
 
 void D() {
   cin >> x;
-  int i = 0;
-  while(T[i] != x && i < k+1) {
-    i++;
+  int i = 1;
+  while(T[i] != x) {
+    if(x < T[i])
+      i *= 2;
+    else
+      i = 2 * i + 1;
   }
-  T[i] = 0;
+  T[i] = -1;
 }
 
 void X() {
-  int *min = nullptr;
-  int *max = nullptr;
   cin >> x;
-  for(int i = 0; i < k; i++) {
-    for(int l = 0; l < k; l++) {
-      if(T[i] > T[l]) {
-        min = &T[l];
-        max = &T[i];
-      }
-    }
+  int i = 1;
+  if(x == 0) {
+    while(T[i] != 0)
+      i *= 2;
+    i = (i/2);
+  } else {
+    while(T[i] != 0)
+      i = i * 2+ 1;
+    i = (i / 2);
   }
-  if(x == 0)
-    cout << *min << '\n';
-  else if(x == 1)
-    cout << *max << '\n';
+
+  cout << T[i] << '\n';
 }
 
 void N() {
   cin >> x;
-  int ind = 0;
-  while(T[ind] != x && ind < k-1)
-    ind++;
-  if(T[ind+1] == 0)
-    cout << "-\n";
-  else
-    cout << T[ind+1] << '\n';
 }
 
 void P() {
   cin >> x;
-  int ind = 0;
-  while(T[ind] != x && ind < k)
-    ind++;
-  if(T[ind-1] == 0)
-    cout << "-\n";
-  else
-    cout << T[ind-1] << '\n';
 }
 
 void R() {
-  cin >> x;
-  switch(x) {
-    case 0: //inorder
-      break;
-    case 2: //preorder
-      for(int i = 0; i < k; i++) {
-        if(T[i] == 0)
-          continue;
-        else
-          cout << T[i] << ' ';
-        }
-      break;
-    case 1: //postorder
-      for(int i = k; i >= 0; i--) {
-        if(T[i] == 0)
-          continue;
-        else
-          cout << T[i] << ' ';
-        }
-      break;
-  }
+
 }
