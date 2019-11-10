@@ -89,11 +89,11 @@ void X() {
   if(x == 0) {
     while(T[i] != 0)
       i *= 2;
-    i = (i/2);
+    i = i / 2;
   } else {
     while(T[i] != 0)
-      i = i * 2+ 1;
-    i = (i / 2);
+      i = i * 2 + 1;
+    i = i / 2;
   }
 
   cout << T[i] << '\n';
@@ -101,10 +101,34 @@ void X() {
 
 void N() {
   cin >> x;
+  int i = 1;
+  while(T[i] != x) {
+    if( x < T[i])
+      i *= 2;
+    else
+      i = i * 2 + 1;
+  }
+  i = i * 2 + 1;
+  if(i == 0)
+    cout << "-\n";
+  else
+    cout << T[i] << '\n';
 }
 
 void P() {
   cin >> x;
+  int i = 1;
+  while(T[i] != x) {
+    if( x < T[i])
+      i *= 2;
+    else
+      i = i * 2 + 1;
+  }
+  i /= 2;
+  if(i == 0)
+    cout << "-\n";
+  else
+    cout << T[i] << '\n';
 }
 
 void R() {
