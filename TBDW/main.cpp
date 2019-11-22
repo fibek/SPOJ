@@ -40,7 +40,8 @@ int main() {
     delete [] T;
   }
 }
-void I(){
+
+void I(){ // completed
   int i = 1;
   bool a = false;
   cin >> x;
@@ -56,34 +57,40 @@ void I(){
   }
 }
 
-void S() {
+void S() { // dodaj wypisanie "-" kiedy nie ma takiej liczby
   cin >> x;
   int i = 1;
   while(T[i] != x) {
     cout << T[i] << ' ';
-    if(T[i] == -1)
-      continue;
-    else if(x < T[i])
-      i *= 2;
-    else
-      i = 2 * i + 1;
-  }
-  cout << T[i] << '\n';
-}
-
-void D() {
-  cin >> x;
-  int i = 1;
-  while(T[i] != x) {
     if(x < T[i])
       i *= 2;
     else
       i = 2 * i + 1;
   }
-  T[i] = -1;
+  cout  << T[i] << '\n';
 }
 
-void X() {
+void D() { // completed
+  cin >> x;
+  int i = 1;
+  do {
+    if(x < T[i])
+      i *= 2;
+    else
+      i = 2 * i + 1;
+  } while(T[i] != x) ;
+  while(T[i] != 0) {
+    if(T[2* i + 1] == 0 && T[2 * i] != 0) { // if there is no bigger look for smaller
+      T[i] = T[2 * i];
+      i *= 2;
+    } else {
+      T[i] = T[2 * i + 1];
+      i = 2 * i + 1;
+    }
+  }
+}
+
+void X() { // completed
   cin >> x;
   int i = 1;
   if(x == 0) {
@@ -99,7 +106,7 @@ void X() {
   cout << T[i] << '\n';
 }
 
-void N() {
+void N() {  // completed
   cin >> x;
   int i = 1;
   while(T[i] != x) {
@@ -115,7 +122,7 @@ void N() {
     cout << T[i] << '\n';
 }
 
-void P() {
+void P() { //completed
   cin >> x;
   int i = 1;
   while(T[i] != x) {
@@ -132,5 +139,26 @@ void P() {
 }
 
 void R() {
-
+  // cin >> x;
+  // int i = 1;
+  // switch(x) {
+  //   case 0:
+  //     for(int l = 0; l < k; l++) {
+  //       while(T[i] != 0) {
+  //         cout << T[i] << ' ';
+  //         i *= 2;
+  //       }
+  //       i /= 4;
+  //       i++;
+  //       while(T[i] != 0) {
+  //         cout << T[i] << ' ';
+  //         i = 2 * i + 1;
+  //       }
+  //       i /= 2;
+  //     }
+  //     cout << '\n';
+  //     break;
+  //   case 1:
+  //     break;
+  // }
 }
