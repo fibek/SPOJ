@@ -8,7 +8,7 @@ using std::sort;
 void I();
 void D();
 void S();
-void X();
+int X(int w);
 void N();
 void P();
 void R();
@@ -31,7 +31,10 @@ int main() {
         case 'I': I(); break;
         case 'D': D(); break;
         case 'S': S(); break;
-        case 'X': X(); break;
+        case 'X':
+          cin >> x;
+          cout << X(x) << '\n';
+          break;
         case 'N': N(); break;
         case 'P': P(); break;
         case 'R': R(); break;
@@ -59,6 +62,8 @@ void I(){ // completed
 
 void S() { // dodaj wypisanie "-" kiedy nie ma takiej liczby
   cin >> x;
+  // if(x < X(0) || x > X(1))
+    // cout << "-";
   int i = 1;
   while(T[i] != x) {
     cout << T[i] << ' ';
@@ -67,7 +72,7 @@ void S() { // dodaj wypisanie "-" kiedy nie ma takiej liczby
     else
       i = 2 * i + 1;
   }
-  cout  << T[i] << '\n';
+  cout << T[i] << '\n';
 }
 
 void D() { // completed
@@ -90,10 +95,9 @@ void D() { // completed
   }
 }
 
-void X() { // completed
-  cin >> x;
+int X(int w) { // completed
   int i = 1;
-  if(x == 0) {
+  if(w == 0) {
     while(T[i] != 0)
       i *= 2;
     i = i / 2;
@@ -102,8 +106,8 @@ void X() { // completed
       i = i * 2 + 1;
     i = i / 2;
   }
-
-  cout << T[i] << '\n';
+  // cout << T[i] << '\n';
+  return T[i];
 }
 
 void N() {  // completed
@@ -139,26 +143,25 @@ void P() { //completed
 }
 
 void R() {
-  // cin >> x;
-  // int i = 1;
-  // switch(x) {
-  //   case 0:
-  //     for(int l = 0; l < k; l++) {
-  //       while(T[i] != 0) {
-  //         cout << T[i] << ' ';
-  //         i *= 2;
-  //       }
-  //       i /= 4;
-  //       i++;
-  //       while(T[i] != 0) {
-  //         cout << T[i] << ' ';
-  //         i = 2 * i + 1;
-  //       }
-  //       i /= 2;
-  //     }
-  //     cout << '\n';
-  //     break;
-  //   case 1:
-  //     break;
-  // }
+  cin >> x;
+  int l = 0,
+      i = 1;
+  switch(x) {
+    case 0:
+      i = 2;
+      while(T[i] != 0) {
+        if(T[2*i] != 0) {
+          cout << T[2*i] << ' ';
+          i *= 2;
+          l++;
+        } else {
+          i /= 2*l;
+          cout << T[i] << ' ';
+          i = i * 2 + 1;
+        }
+      }
+    case 1:
+      break;
+  }
+  cout << '\n';
 }
